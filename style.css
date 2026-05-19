@@ -1,18 +1,22 @@
+/* إعادة تعيين الهوامش وتنسيق خلفية الصفحة */
 body {
     margin: 0;
-    padding: 0;
+    padding: 40px 0; /* مساحة مريحة في أعلى وأسفل الصفحة لتسهيل التصفح */
     font-family: 'Tajawal', sans-serif;
     background: url('png(1).png') no-repeat center center fixed;
     background-size: cover; 
-    height: 100vh;
+    min-height: 100vh; /* تسمح للصفحة بالتمدد بشكل مرن لتستوعب الصناديق */
     display: flex;
+    flex-direction: column; /* ترتيب البطاقات عمودياً فوق بعضها البعض */
     justify-content: center;
     align-items: center;
+    gap: 30px; /* المسافة الفاصلة والواضحة بين صندوق البحث وصندوق أعضاء المشروع */
 }
 
+/* تنسيق البطاقة الرئيسية الأولى (صندوق البحث والنتائج) */
 .main-card {
     background: rgba(255, 255, 255, 0.8); /* خلفية بيضاء شفافة */
-    backdrop-filter: blur(12px); /* تأثير الضباب الخلفي */
+    backdrop-filter: blur(12px); /* تأثير الضباب الخلفي الأنيق */
     padding: 40px;
     border-radius: 30px;
     width: 90%;
@@ -22,6 +26,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+/* تنسيق الشعار وتكبيره ليكون بارزاً */
 .logo { 
     width: 400px; 
     height: auto;
@@ -29,18 +34,20 @@ body {
     filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
 }
 
+/* عناوين الواجهة */
 h1 { 
     color: #1a4a63; 
     font-size: 1.8rem; 
     margin-bottom: 5px; 
 }
 
-p.subtitle {
-    color: #555;
-    font-size: 1rem;
-    margin-bottom: 25px;
+p.subtitle { 
+    color: #555; 
+    font-size: 1rem; 
+    margin-bottom: 25px; 
 }
 
+/* شريط البحث المطور */
 .search-group { 
     background: #ffffff; 
     padding: 8px; 
@@ -55,11 +62,12 @@ input {
     border: none; 
     padding: 12px 20px; 
     outline: none; 
-    font-family: inherit;
-    font-size: 1rem;
-    background: transparent;
+    font-family: inherit; 
+    font-size: 1rem; 
+    background: transparent; 
 }
 
+/* زر البحث وتأثيراته الحركية */
 button { 
     background: linear-gradient(135deg, #2c5e77, #1a4a63); 
     color: white; 
@@ -71,17 +79,18 @@ button {
     transition: transform 0.2s, box-shadow 0.2s;
 }
 
-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(26, 74, 99, 0.3);
+button:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 5px 15px rgba(26, 74, 99, 0.3); 
 }
 
+/* صندوق ظهور النتائج */
 .info-box { 
     margin-top: 30px; 
     padding: 20px; 
     background: rgba(255, 255, 255, 0.9); 
     border-radius: 20px; 
-    border-right: 5px solid #2c5e77; /* خط جانبي ملون */
+    border-right: 5px solid #2c5e77; /* خط جانبي ملون لتمييز النتيجة */
     text-align: right;
     animation: fadeIn 0.5s ease-in-out;
 }
@@ -91,58 +100,69 @@ button:hover {
     to { opacity: 1; transform: translateY(0); }
 }
 
-.room-title {
-    color: #2c5e77;
-    font-size: 1.4rem;
-    margin-bottom: 15px;
-    display: block;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
+.room-title { 
+    color: #2c5e77; 
+    font-size: 1.4rem; 
+    margin-bottom: 15px; 
+    display: block; 
+    border-bottom: 1px solid #eee; 
+    padding-bottom: 10px; 
 }
 
-.data-item {
-    background: #f8f9fa;
-    padding: 10px 15px;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* أسطر بيانات القاعة (التعريف والموقع) */
+.data-item { 
+    background: #f8f9fa; 
+    padding: 10px 15px; 
+    border-radius: 12px; 
+    margin-bottom: 10px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
 }
 
-.data-label { font-weight: bold; color: #666; }
-.data-value { color: #333; }
+.data-label { 
+    font-weight: bold; 
+    color: #666; 
+}
 
-/* تنسيق صندوق فريق تنفيذ المشروع بشكل عمودي مع إضافة مسافة */
+.data-value { 
+    color: #333; 
+}
+
+/* تنسيق صندوق أعضاء المشروع (البطاقة الثانية المستقلة والمنفصلة بالأسفل) */
 .team-box {
-    margin-top: 40px; /* زيادة المسافة بين صندوق البحث وفريق العمل */
-    padding: 15px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.8); /* نفس درجة شفافية ومظهر الصندوق العلوي لتناسق تام */
+    backdrop-filter: blur(12px);
+    padding: 25px;
+    border-radius: 30px;
+    width: 90%;
+    max-width: 500px; /* نفس عرض صندوق البحث ليكون للموقع محاذاة متطابقة وممتازة */
     text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .team-title {
     color: #1a4a63;
-    font-size: 1.1rem;
-    margin: 0 0 12px 0;
+    font-size: 1.2rem;
+    margin: 0 0 15px 0;
     font-weight: bold;
     border-bottom: 1px dashed rgba(26, 74, 99, 0.2);
-    padding-bottom: 5px;
+    padding-bottom: 8px;
 }
 
 .team-members {
     color: #444;
-    font-size: 1rem;
-    line-height: 1.8;
+    font-size: 1.05rem;
+    line-height: 1.9;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* ترتيب أسماء الطالبات سطر بسطر (عمودياً) */
     align-items: center;
 }
 
+/* تمييز اسم الأستاذة المشرفة */
 .supervisor {
-    margin-top: 8px;
+    margin-top: 10px;
     font-weight: bold;
     color: #2c5e77;
 }
