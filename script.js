@@ -28,11 +28,10 @@ const roomData = [
     { code: "3600121028", def: "F-148 F-150 معمل 9", loc: "الدور الأول - ممر: 1" },
     { code: "3600121155", def: "F155", loc: "الدور الأول - ممر: 1" },
     { code: "3600121139", def: "F-139 F-143 معمل 8", loc: "الدور الأول - ممر: 1" },
-    { code: "3600122018", def: "F-160 F-162 معمل 6", loc: "الدور الأول - ممر: 1" },
-    { code: "3600122019", def: "F-164 F-167 معمل 7", loc: "الدور الأول - ممر: 1" },
+    { code: "3600122018", def: "F-160 F-162 معمل 6", loc: "الدور الأول - ممر: 2" },
+    { code: "3600122019", def: "F-164 F-167 معمل 7", loc: "الدور الأول - ممر: 2" },
     { code: "3600122022", def: "F-159", loc: "الدور الأول - ممر: 2" },
     { code: "3600123011", def: "F-183 F-185", loc: "الدور الأول - ممر: 3" },
-    { code: "3600123027", def: "G-060", loc: "الدور الأول - غير محدد" },
     { code: "3600124012", def: "F-175 F-179", loc: "الدور الأول - ممر: 3" },
     { code: "3600124013", def: "F-189 F-190", loc: "الدور الأول - ممر: 4" },
     { code: "3600124015", def: "F-191 F-193", loc: "الدور الأول - ممر: 4" },
@@ -64,24 +63,35 @@ const roomData = [
     { code: "S-248", def: "S-248", loc: "الدور الثاني - ممر: 3 (لم تفعل بعد)" },
     { code: "S-249", def: "S-249", loc: "الدور الثاني - ممر: 3 (لم تفعل بعد)" }
 ];
-
-// دالة البحث الذكية
+//
 function findClass() {
-    const input = document.getElementById('classInput').value.trim().toLowerCase();
+    const rawInput = document.getElementById('classInput').value.trim().toLowerCase();
     const resultDiv = document.getElementById('result');
 
-    // البحث إما بالرمز أو تعريف الغرفة أو اسم المعمل
-    const room = roomData.find(r => 
-        r.code.toLowerCase().includes(input) || 
-        r.def.toLowerCase().includes(input)
-    );
+    // تنظيف المدخلات من الفواصل والشرطات لمطابقة أدق
+    const cleanInput = rawInput.replace(/[-\s]/g, "");
+
+    if (!cleanInput) {
+        resultDiv.style.display = "none";
+        return;
+    }
+
+    // 1. أولوية البحث: مطابقة تعريف الغرفة أولاً (مثل 220 أو S-220 أو معمل 6)
+    let room = roomData.find(r => {
+        const cleanDef = r.def.toLowerCase().replace(/[-\s]/g, "");
+        return cleanDef.includes(cleanInput);
+    });
+
+    // 2. إذا لم يعثر عليها في التعريف، يبحث في الرمز الطويل
+    if (!room) {
+        room = roomData.find(r => r.code.toLowerCase().includes(cleanInput));
+    }
 
     // عرض النتيجة
-    if (room && input !== "") {
+    if (room) {
         document.getElementById('roomCode').innerText = "الرمز: " + room.code;
         document.getElementById('roomDef').innerText = room.def;
         document.getElementById('roomLoc').innerText = room.loc;
-        
         resultDiv.style.display = "block";
     } else {
         alert("عذراً، لم يتم العثور على القاعة. تأكدي من إدخال الرمز أو الاسم بشكل صحيح.");
